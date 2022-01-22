@@ -1,0 +1,54 @@
+name: Workflow1
+on:
+  workflow_dispatch:
+    inputs:
+          terraformaction:
+            type: choice
+            description: Terraform Action
+            options: 
+            - Plan
+            - Apply
+            - Destroy
+            - Import
+permissions:
+  id-token: write
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCT_ID }}:role/GHIAMRole
+          aws-region: us-east-2
+
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: init and plan terraform
+        uses: hashicorp/setup-terraform@v1
+      
+      - name: init terraform
+        working-directory: Terraform
+        run: terraform init
+      
+      - name: Plan Terraform
+        if: ${{ github.event.inputs.terraformaction== 'Plan' }}
+        working-directory: Terraform
+        id: plan
+        run: terraform plan -no-color
+
+      - name: Apply Terraform
+        if: ${{ github.event.inputs.terraformaction== 'Apply' }}
+        working-directory: Terraform
+        id: apply
+        run: terraform apply -no-color -auto-approve
+
+      - name: Destroy Terraform
+        if: ${{ github.event.inputs.terraformaction== 'Destroy' }}
+        working-directory: Terraform
+        id: destroy
+        run: terraform destroy -no-color -auto-approve

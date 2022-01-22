@@ -1,0 +1,3 @@
+ami-0730adff5a378dbfc
+path reference
+/aws/service/canonical/ubuntu/server/20.04/stable/current/amd64/hvm/ebs-gp2/ami-id
