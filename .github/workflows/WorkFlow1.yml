@@ -21,7 +21,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@master
         with:
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCT_ID }}:role/GHIAMRole
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCT_ID }}:role/TerraformInActionIAMRole
           aws-region: us-east-2
 
       - uses: hashicorp/setup-terraform@v1
