@@ -28,6 +28,11 @@ jobs:
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
+      - name: pwd
+        shell: bash
+        run: |
+          pwd
+
       - name: init and plan terraform
         uses: hashicorp/setup-terraform@v1
       
