@@ -38,23 +38,23 @@ jobs:
         uses: hashicorp/setup-terraform@v1
       
       - name: init terraform
-        working-directory: Terraform
+        working-directory: TF
         run: terraform init
       
       - name: Plan Terraform
         if: ${{ github.event.inputs.terraformaction== 'Plan' }}
-        working-directory: Terraform
+        working-directory: TF
         id: plan
         run: terraform plan -no-color
 
       - name: Apply Terraform
         if: ${{ github.event.inputs.terraformaction== 'Apply' }}
-        working-directory: Terraform
+        working-directory: TF
         id: apply
         run: terraform apply -no-color -auto-approve
 
       - name: Destroy Terraform
         if: ${{ github.event.inputs.terraformaction== 'Destroy' }}
-        working-directory: Terraform
+        working-directory: TF
         id: destroy
         run: terraform destroy -no-color -auto-approve
