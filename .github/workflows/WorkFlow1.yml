@@ -32,6 +32,7 @@ jobs:
         shell: bash
         run: |
           pwd
+          ls
 
       - name: init and plan terraform
         uses: hashicorp/setup-terraform@v1
