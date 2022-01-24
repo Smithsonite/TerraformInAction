@@ -17,7 +17,7 @@ terraform {
     }
     cloudinit = {
       source = "hasicorp/cloudinit"
-      version "~> 2.1"
+      version = "~> 2.1"
     }
   }
 }
