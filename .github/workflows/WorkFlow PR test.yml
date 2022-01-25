@@ -36,7 +36,6 @@ jobs:
         run: terraform init
       
       - name: Plan Terraform
-        if: ${{ github.event.inputs.terraformaction== 'Plan' }}
         working-directory: TFCH4
         id: plan
         run: terraform plan -no-color
